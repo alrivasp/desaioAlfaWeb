@@ -15,7 +15,7 @@ export default new Vuex.Store({
     totalCursos: state => state.cursos.length,
     totalCursosActivos: (state) => {
       const cursoActivo = state.cursos.filter((curso) => {
-        if (curso.estado === true) {
+        if (curso.estado === 'true') {
           return curso
         }
       })
@@ -23,14 +23,15 @@ export default new Vuex.Store({
     },
     totalCursosTerminados: (state) => {
       const cursoTerminado = state.cursos.filter((curso) => {
-        if (curso.estado === 'No') {
+        if (curso.estado === 'false') {
           return curso
         }
       })
       return cursoTerminado.length
     },
     totalCuposPermitidos: (state) => {
-      return state.cursos.map(item => item.cupos).reduce((prev, cupos) => prev + cupos)
+      console.log(state.cursos.map(item => item.cupos).reduce((prev, cupos) => parseInt(prev) + parseInt(cupos)))
+      return state.cursos.map(item => item.cupos).reduce((prev, cupos) => parseInt(prev) + parseInt(cupos))
     },
     totalCuposInscritos: (state) => {
       return state.cursos.reduce(function (total, curso) {
